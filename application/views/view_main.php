@@ -10,16 +10,15 @@
 				<td><?php echo form_input('std_num', 'Your Student Number'); ?></td>
 			</tr>
 			<tr>
-				<td><?php echo form_label('Select your photo', 'file'); ?></td>
+				<td><?php echo form_label('Your photo:', 'photo'); ?></td>
 				<td>
 					<input type="file" name="userfile" size="20" />
-					<input type="submit" value="upload" />
+					<?php echo form_submit('upload', 'Upload'); ?>
 				</td>
 			</tr>
 
 		</table>
 
-	</form>
-
+	<?php echo form_close(); ?>
 
 </div>
