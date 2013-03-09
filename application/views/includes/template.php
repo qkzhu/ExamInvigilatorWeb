@@ -1,12 +1,13 @@
-<html>
+<!DOCTYPE html>
+
+<html lang="en">
 <head>
 	<meta http-equiv="Content-type" content="text/html; charset-utf-8" />
 
 	<title>Exam Invigilator Web Tool</title>
 
-	<?php if ( isset($style) ): ?>
-		<link rel="stylesheet" href="css/style.css" type="text/css" media="screen" />
-	<?php endif; ?>
+	<?php echo "<link rel='stylesheet' href='" . base_url() . "/css/style.css' type='text/css' media='screen' />"; ?>
+
 </head>
 <body>
 
