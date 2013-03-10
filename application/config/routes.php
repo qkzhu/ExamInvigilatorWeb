@@ -38,6 +38,8 @@
 |
 */
 
+$route['PhotoUploader'] = "PhotoUploader";
+$route['PhotoUploader/(:any)'] = "PhotoUploader/$1";
 $route['default_controller'] = "PhotoUploader";
 $route['404_override'] = '';
 

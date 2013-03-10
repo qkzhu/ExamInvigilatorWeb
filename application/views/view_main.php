@@ -1,25 +1,22 @@
+<? //08P245A41 ?>
 <div class="form">
 
-	<?php echo $error; ?>
+	<?php //echo $error['error']; ?>
 
-	<?php echo form_open_multipart('photoUploader/do_upload');?>
+	<?php echo form_open_multipart('photoUploader/do_upload', 'id="the_only_form"');?>
 
-		<table border="1">
-			<tr>
-				<td><?php echo form_label('Student Number:', 'std_num'); ?></td>
-				<td><?php echo form_input('std_num', 'Your Student Number'); ?></td>
-			</tr>
-			<tr>
-				<td><?php echo form_label('Your photo:', 'photo'); ?></td>
-				<td>
-					<input type="file" name="userfile" size="20" />
-					<?php echo form_submit('upload', 'Upload'); ?>
-				</td>
-			</tr>
+	<div class="field">
+		<?php echo form_label('Student Number:', 'std_num'); ?>
+		<?php echo form_input('std_num', '', 'class="required"'); ?>
+	</div>
 
-		</table>
+	<div class="field">
+		<?php echo form_label('Your photo:', 'photo'); ?>
+		<input type="file" name="userfile" size="20" 'class="btn"' />
+	</div>
+
+	<?php echo form_submit('upload', 'Upload', 'class="btn"'); ?>
 
 	<?php echo form_close(); ?>
-
 
 </div>

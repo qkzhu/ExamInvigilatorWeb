@@ -1,7 +1,7 @@
-<div class="banner">
-	<p>Banner</p>
+<div class="banner_logo">
+	<?php echo "<img src='" . base_url() . "images/logo.png' />"; ?>
 </div>
 
-<div class="main_menu">
-	<p>Main Menu</p>
+<div class="banner">
+	<p>Exam Invigilator</p>
 </div>
