@@ -74,6 +74,7 @@ body {
 	margin-left:220px;
 }
 
+#the_only_form span.error { color: red; padding-left:10px; }
 
 
 .footer {
