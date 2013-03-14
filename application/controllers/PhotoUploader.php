@@ -5,28 +5,99 @@ class PhotoUploader extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->model('model_student');
+		$this->load->model('model_config');
 	}
 
 	function index()
 	{
+		$data = $this->getPageComponents();
+		$data['main'] = 'view_main';
+		$this->load->view('includes/template', $data);
+	}
+
+
+	/**
+	 * Get all neccessary component to form a completed page for each time loading.
+	 * But need to define 'main' for different situation.
+	 */
+	private function getPageComponents()
+	{
 		// reset $data in case returned from upload_success page
 		$data=null;
 
-		$data['main'] = 'view_main';
+		$data['dep_arr'] = $this->model_student->get_all_department();
+		$data['year_arr'] = $this->model_config->gen_year_arr();
+		$data['module_arr'] = $this->model_student->get_all_module();
 		$data['error'] = '';
-		$this->load->view('includes/template', $data);
+
+		return $data;
 	}
 
 
 	// TODO: check if same student has uploaded photo before
 	function do_upload()
 	{
+		// print_r( $_FILES );
 
-		$this->load->library( 'form_validation' );
-		$this->form_validation->set_error_delimiters('<span class="error"', '</span>');
+		$data = $this->getPageComponents();		
 
-		$this->form_validation->set_rules('std_num', 'Student Number', 'trim|required|exact_length[9]');
+		// get inputs
+		$data['std_num'] = $this->input->post('std_num');
+		$data['std_name'] = $this->input->post('std_name');
+		$data['std_ic'] = $this->input->post('std_ic');
+		$data['gender'] = $this->input->post('gender');
+		$data['dep'] = $this->input->post('dep');
+		$data['year'] = $this->input->post('year');
+		$data['module'] = $this->input->post('module');
 
+
+		// set field to display error message individually
+		$field = array(
+					array(
+						'field' => 'std_num', 
+						'label' => 'Student Number',
+						'rules' => 'trim|required|exact_length[9]'
+						),
+					array(
+						'field' => 'std_name', 
+						'label' => 'Student Name',
+						'rules' => 'trim|required|min_length[3]|max_length[50]'
+						),
+					array(
+						'field' => 'std_ic', 
+						'label' => 'NRIC / Passport',
+						'rules' => 'trim|required'
+						),
+					array(
+						'field' => 'gender', 
+						'label' => 'Gender',
+						'rules' => 'required'
+						),
+					array(
+						'field' => 'dep', 
+						'label' => 'Department',
+						'rules' => 'required'
+						),
+					array(
+						'field' => 'year', 
+						'label' => 'Year of Enrolment',
+						'rules' => 'required'
+						),
+					array(
+						'field' => 'module', 
+						'label' => 'Registered Module',
+						'rules' => 'required'
+						),
+					array(
+						'field' => 'userfile', 
+						'label' => 'Choose file',
+						'rules' => 'required'
+						)
+				);
+		$this->form_validation->set_rules($field);
+
+		// set error message for student number field
 		$this->form_validation->set_message( 'exact_length', 'Invalid Student Number Format');
 
 
@@ -38,28 +109,29 @@ class PhotoUploader extends CI_Controller {
 
 		else 
 		{
-
 			$config['upload_path'] = './uploads/';
 			$config['allowed_types'] = 'jpeg|jpg';
 			$config['max_size']	= '100';
 			$config['max_width']  = '1024';
 			$config['max_height']  = '768';
-			$config['file_name']  = $_POST['std_num'];
+			$config['file_name']  = $data['std_num'];
 
 
 			$this->load->library('upload', $config);
 
-			$data = null;
+			// $data = null;
 
-			if ( ! $this->upload->do_upload())
+			if ( ! $this->upload->do_upload() )
 			{
-				$data['error'] = array('error' => $this->upload->display_errors());
+				$data['error'] = array( 'error' => $this->upload->display_errors() );
 				$data['main'] = 'view_main';
+				$data['for_testing'] = 'hhhh';
 			}
 			else
 			{
 				$data = array('upload_data' => $this->upload->data());
 				$data['main'] = 'view_upload_success';
+				$data['for_testing'] = 'tttt';
 			}
 
 			$this->load->view('includes/template', $data);
@@ -83,26 +155,5 @@ class PhotoUploader extends CI_Controller {
 		$this->index();
 	}
 
-
-	function ttt()
-	{
-		$this->load->model('model_student');
-		
-		// $this->model_student->update_std_info('123456789', 'name_test', 's8464736W', 'f', '1', 2006, '1');
-		// $data = $this->model_student->get_all_department();
-		// $data = $this->model_student->get_all_module();
-		// $this->model_student->create_std_mod_map(1,10);
-		// $this->model_student->create_std_mod_map(1,12);
-		
-		// echo '<p>';
-
-		// echo $data[0]->id;
-
-		// echo '</p>';
-
-		// foreach ($data as $d) { echo $d->name . '<br />'; }
-
-		return;
-	}
 
 } // end class PhotoUploader

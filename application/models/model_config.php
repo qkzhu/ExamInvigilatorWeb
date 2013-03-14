@@ -49,4 +49,18 @@ class Model_config extends CI_Model
 	public $MAP_MID = "module_id";
 
 
+	/**
+	 * Returns an array with year = > year from 2007 - 2013
+	 */
+	function gen_year_arr() 
+	{
+		$result = array();
+
+		for ( $i=2007; $i <= 2013 ; $i++ ) {
+			$result[$i] = $i;
+		}
+
+		return $result;
+	} // end gen_year_arr
+
 }// end Model_shop_list

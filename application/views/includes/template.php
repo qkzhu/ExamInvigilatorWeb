@@ -1,18 +1,21 @@
-<!DOCTYPE html>
-
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset-utf-8" />
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
 
 	<title>Exam Invigilator Web Tool</title>
 
-	<?php //echo "<link rel='stylesheet' href='" . base_url() . "/css/style.css' type='text/css' media='screen' />"; ?>
+
+	<!--
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" />
 
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js" ></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.validate.min.js" ></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.validate-rules.js" ></script>
-
+	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery_add_module.js" ></script>
+	
+	-->
+	
 </head>
 
 <body>

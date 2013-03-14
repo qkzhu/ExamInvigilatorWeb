@@ -44,7 +44,7 @@ class Model_student extends CI_Model {
 
 
 	/**
-	 * Returns a list with 2 columns, which are department id | name
+	 * Returns a list with 2 columns, which are department id => name
 	 */
 	function get_all_department() 
 	{
@@ -53,13 +53,19 @@ class Model_student extends CI_Model {
 		$this->db->select($this->model_config->DEP_NAME);
 		$query = $this->db->get($this->model_config->DEP_TABLE);
 		
-		return $query->result();
+		$query_result = $query->result();
+		$result = array();
+		foreach ( $query_result as $r ) {
+			$result[$r->{$this->model_config->DEP_ID}] = $r->{$this->model_config->DEP_NAME};
+		}
+
+		return $result;
 
 	} // end get_all_department
 
 
 	/**
-	 * Returns a list with 3 columns, which are: module id | code | name
+	 * Returns a list with 3 columns, which are: module id => [code] name
 	 */
 	function get_all_module() 
 	{
@@ -69,7 +75,15 @@ class Model_student extends CI_Model {
 		$this->db->select($this->model_config->MOD_NAME);
 		$query = $this->db->get($this->model_config->MOD_TABLE);
 		
-		return $query->result();
+		$query_result = $query->result();
+		$result = array();
+		foreach ( $query_result as $r ) {
+			$result[$r->{$this->model_config->MOD_ID}] = 
+					"[" . $r->{$this->model_config->MOD_CODE} . "] " 
+					. $r->{$this->model_config->MOD_NAME};
+		}
+
+		return $result;
 
 	} // end get_all_module
 
