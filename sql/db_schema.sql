@@ -14,6 +14,7 @@ create table student(
 	gender char(1) not null,
 	department int not null,
 	enrol_year year not null,
+	has_photo tinyint(1) default 0 not null check(has_photo in (0,1)),
 	unique(student_number),
 	primary key(id),
 	foreign key(department) references department(id)
@@ -79,4 +80,3 @@ insert into module(module_code, name) values('EE4105', 'CELLULAR COMMUNICATION S
 insert into module(module_code, name) values('EE4079', 'FINAL YEAR PROJECT');
 insert into module(module_code, name) values('EE4041', 'HUMAN RESOURCE MANAGEMENT');
 insert into module(module_code, name) values('EE4079', 'FINAL YEAR PROJECT');
-
