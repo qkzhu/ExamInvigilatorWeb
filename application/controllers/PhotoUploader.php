@@ -67,6 +67,7 @@ class PhotoUploader extends CI_Controller {
 
 	}// end do_upload()
 
+	
 	function download_zip()
 	{
 		$this->load->library('zip');
@@ -80,6 +81,28 @@ class PhotoUploader extends CI_Controller {
 		$this->MY_Zip->download('StudentPhotos.zip');
 
 		$this->index();
+	}
+
+
+	function ttt()
+	{
+		$this->load->model('model_student');
+		
+		// $this->model_student->update_std_info('123456789', 'name_test', 's8464736W', 'f', '1', 2006, '1');
+		// $data = $this->model_student->get_all_department();
+		// $data = $this->model_student->get_all_module();
+		// $this->model_student->create_std_mod_map(1,10);
+		// $this->model_student->create_std_mod_map(1,12);
+		
+		// echo '<p>';
+
+		// echo $data[0]->id;
+
+		// echo '</p>';
+
+		// foreach ($data as $d) { echo $d->name . '<br />'; }
+
+		return;
 	}
 
 } // end class PhotoUploader

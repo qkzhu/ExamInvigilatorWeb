@@ -6,6 +6,7 @@ create table department(
 	primary key(id)
 )ENGINE=InnoDB;
 
+
 create table student(
 	id int not null auto_increment,
 	student_number varchar(16) not null,
@@ -20,12 +21,14 @@ create table student(
 	foreign key(department) references department(id)
 )ENGINE=InnoDB;
 
+
 create table module(
 	id int not null auto_increment,
 	module_code varchar(32) not null,
 	name varchar(128) not null,
 	primary key(id)
 )ENGINE=InnoDB;
+
 
 create table map_student_module(
 	student_id int not null,
@@ -35,7 +38,10 @@ create table map_student_module(
 	foreign key(module_id) references module(id)
 )ENGINE=InnoDB;
 
--- ******************************** REQUIRED sample data ********************************
+
+
+-- ******************************** REQUIRED Data For Demo ********************************
+
 insert into department(name) values('MAE');
 insert into department(name) values('SCBE');
 insert into department(name) values('CEE');
@@ -80,3 +86,5 @@ insert into module(module_code, name) values('EE4105', 'CELLULAR COMMUNICATION S
 insert into module(module_code, name) values('EE4079', 'FINAL YEAR PROJECT');
 insert into module(module_code, name) values('EE4041', 'HUMAN RESOURCE MANAGEMENT');
 insert into module(module_code, name) values('EE4079', 'FINAL YEAR PROJECT');
+
+
