@@ -8,6 +8,9 @@ class Model_student extends CI_Model {
 	}
 
 
+	/**
+	  *  insert student info into database and return the last inserted id. 
+	  */ 
 	function create_new_student($std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo)
 	{
 		$data = array(
@@ -21,6 +24,8 @@ class Model_student extends CI_Model {
 		);
 		
 		$this->db->insert($this->model_config->STD_TABLE, $data);
+
+		return $this->db->insert_id();
 
 	} // end create_new_student
 
@@ -70,10 +75,10 @@ class Model_student extends CI_Model {
 	function get_all_module() 
 	{
 
-		$this->db->select($this->model_config->MOD_ID);
-		$this->db->select($this->model_config->MOD_CODE);
-		$this->db->select($this->model_config->MOD_NAME);
-		$query = $this->db->get($this->model_config->MOD_TABLE);
+		$this->db->select( $this->model_config->MOD_ID );
+		$this->db->select( $this->model_config->MOD_CODE );
+		$this->db->select( $this->model_config->MOD_NAME );
+		$query = $this->db->get( $this->model_config->MOD_TABLE );
 		
 		$query_result = $query->result();
 		$result = array();
@@ -89,17 +94,38 @@ class Model_student extends CI_Model {
 
 
 	/**
+	 * Returns module name by given module id.
+	 */
+	function get_module_by_mid( $mid ) {
+		$this->db->select( $this->model_config->MOD_CODE );
+		$this->db->select( $this->model_config->MOD_NAME );
+		$this->db->where( $this->model_config->MOD_ID, $mid );
+		$query = $this->db->get( $this->model_config->MOD_TABLE );
+
+		$result = $query->result();
+
+		if ( isset($result) && sizeof($result) )
+			return "[" 
+					. $result[0]->{ $this->model_config->MOD_CODE }
+					. "] "
+					. $result[0]->{ $this->model_config->MOD_NAME };
+		else return '';
+	}
+
+
+	/**
 	 * Primary key map table between student & module
 	 */
-	function create_std_mod_map($std_id, $mod_id) 
+	function create_std_mod_map($std_id, $mod_id_arr) 
 	{
-
-		$data = array(
-			$this->model_config->MAP_SID => $std_id,
-			$this->model_config->MAP_MID => $mod_id
-		);
+		foreach($mod_id_arr as $index => $mid) {
+			$data = array(
+				$this->model_config->MAP_SID => $std_id,
+				$this->model_config->MAP_MID => $mid
+			);
 		
-		$this->db->insert($this->model_config->MAP_TABLE, $data);
+			$this->db->insert($this->model_config->MAP_TABLE, $data);
+		}
 
 	} // end create_std_mod_map
 

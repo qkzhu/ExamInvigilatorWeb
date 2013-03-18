@@ -37,7 +37,8 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-
+$route['InfoUpdate'] = "InfoUpdate";
+$route['InfoUpdate/(:any)'] = "InfoUpdate/$1";
 $route['PhotoUploader'] = "PhotoUploader";
 $route['PhotoUploader/(:any)'] = "PhotoUploader/$1";
 $route['default_controller'] = "PhotoUploader";

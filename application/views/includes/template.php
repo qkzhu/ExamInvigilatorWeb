@@ -5,6 +5,28 @@
 
 	<title>Exam Invigilator Web Tool</title>
 
+	<!--
+	<script type="text/javascript">document.cookie = 'hasJS=true';</script>
+
+	<script type="text/javascript">
+	function tellIfJSIsEnabled()
+	{
+		alert('onload this page?');
+
+		var xmlhttp;
+		// code for IE7+, Firefox, Chrome, Opera, Safari
+		if (window.XMLHttpRequest) {
+			xmlhttp=new XMLHttpRequest();
+		}
+		else { // code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+
+		xmlhttp.open("POST", "photoUploader/index.php", true);
+		xmlhttp.send("hasJS=true");
+	}
+	</script>
+	-->
 
 	<!--
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" />
@@ -15,7 +37,7 @@
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery_add_module.js" ></script>
 	
 	-->
-	
+
 </head>
 
 <body>

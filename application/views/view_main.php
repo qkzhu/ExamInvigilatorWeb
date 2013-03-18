@@ -47,9 +47,14 @@
 
 
 	<div class="field">
-		<?php echo form_label('Registered Module:', 'module'); ?>
-		<?php echo form_dropdown('module', $module_arr, isset($module) ? $module : 0); ?>
-		<?php echo form_button('add_module', 'Add', 'id="btn_add_module"'); ?>
+		<?php echo form_label('Registered Module:', 'selected_module'); ?>
+
+		<?php // echo form_dropdown('module', $module_arr, isset($module) ? $module : 0); ?>
+		<?php // echo form_submit('submit', 'Add', 'class="btn"'); ?>
+		<?php // echo form_error('module'); ?>
+
+		<?php echo form_multiselect( 'selected_module[]', $module_arr, isset( $std_module ) ? $std_module : array() ); ?>
+		<?php //echo form_submit('submit', 'Remove', 'class="btn"'); ?>
 		<?php echo form_error('module'); ?>
 	</div>
 
@@ -58,8 +63,7 @@
 		<?php echo form_label('Photo:', 'photo'); ?>
 		<input type="file" name="userfile" size="20" 'class="btn"' />
 		<?php echo form_error('userfile'); ?>
-		<?php echo isset($error) ? $error : '';?>
-		<?php echo isset($for_testing) ? 'set' : 'no set';?>
+		<?php echo isset($error['error']) ? $error['error'] : '';?>
 	</div>
 
 
