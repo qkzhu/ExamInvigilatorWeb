@@ -8,10 +8,12 @@ class Model_student extends CI_Model {
 	}
 
 
+
+
 	/**
 	  *  insert student info into database and return the last inserted id. 
 	  */ 
-	function create_new_student($std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo)
+	function create_new_student( $std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo )
 	{
 		$data = array(
 			$this->model_config->STD_NUM => $std_num,
@@ -30,7 +32,11 @@ class Model_student extends CI_Model {
 	} // end create_new_student
 
 
-	function update_std_info($std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo)
+
+
+
+
+	function update_std_info( $std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo )
 	{
 		$data = array(
 			$this->model_config->STD_NUM => $std_num,
@@ -46,6 +52,30 @@ class Model_student extends CI_Model {
 		$this->db->update($this->model_config->STD_TABLE, $data);
 
 	} // end update_std_info
+
+
+
+	/**
+	 * Return array with format: id => student_num
+	 */
+	function get_all_students()
+	{
+
+		$this->db->select( $this->model_config->STD_ID );
+		$this->db->select( $this->model_config->STD_NUM );
+		$query = $this->db->get( $this->model_config->STD_TABLE );
+
+		$query_result = $query->result();
+		$result = array(-1 => '-');
+		foreach ( $query_result as $r ) {
+			$result[ $r->{$this->model_config->STD_ID} ] = $r->{$this->model_config->STD_NUM};
+		}
+
+		return $result;
+
+	} // end get_all_students
+
+
 
 
 	/**
@@ -67,6 +97,10 @@ class Model_student extends CI_Model {
 		return $result;
 
 	} // end get_all_department
+
+
+
+
 
 
 	/**
@@ -91,6 +125,36 @@ class Model_student extends CI_Model {
 		return $result;
 
 	} // end get_all_module
+
+
+
+
+
+
+	/**
+	 * Returns all module ids associated with student id
+	 */
+	function get_all_module_by_sid( $std_id )
+	{
+		$queryString = 
+			sprintf( 'SELECT m.id FROM module m, student s, map_student_module map WHERE '
+					. 'map.student_id = s.id and map.module_id = m.id and s.id = %s', $std_id);
+
+		$query = $this->db->query( $queryString );
+		$query_result = $query->result();
+
+		$result = array();		
+		foreach ( $query_result as $r ) {
+			array_push($result, $r->id);
+		}
+
+		return $result;
+		
+	} // end get_all_module_by_sid
+
+
+
+
 
 
 	/**

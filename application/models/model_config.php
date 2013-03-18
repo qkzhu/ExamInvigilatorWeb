@@ -15,6 +15,7 @@ class Model_config extends CI_Model
 	 * Columns names for student table.
 	 */
 	public $STD_TABLE = "student";
+	public $STD_ID = "id";
 	public $STD_NUM = "student_number";
 	public $STD_NAME = "student_name";
 	public $STD_IC = "ic_passport";

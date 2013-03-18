@@ -8,7 +8,7 @@ class PhotoUploader extends CI_Controller {
 		$this->load->model( 'model_student' );
 		$this->load->model( 'model_config' );
 
-		echo '<script type="text/javascript">document.cookie = "hasJS=true";</script>';
+		// echo '<script type="text/javascript">document.cookie = "hasJS=true";</script>';
 
 		// $this->session->set_userdata( array('user_selected_modules' => array()) );
 	}

@@ -1,14 +1,20 @@
 <div class="form">
 
-	<?php echo form_open_multipart('photoUploader/do_upload', 'id="the_only_form"');?>
+	<div id="search_form">
+		<?php echo form_open_multipart('infoUpdate/stdSearch', 'id="search_form"');?>
 
+		<div class="field">
+			<?php echo form_label( 'SelectStudent Number:', 'select_std_id' ); ?>
+			<?php echo form_dropdown( 'select_std_id', $std_list, isset($select_std_id) ? $select_std_id : -1 ); ?>
+			<?php echo form_error( 'std_num' ); ?>
+		</div>
 
-	<div class="field">
-		<?php echo form_label('Student Number:', 'std_num'); ?>
-		<?php echo form_input('std_num', isset($std_num) ? $std_num : '', 'class="required"'); ?>
-		<?php echo form_error('std_num'); ?>
+		<?php echo form_submit('submit', 'Search', 'class="btn"'); ?>
+
+		<?php echo form_close(); ?>
 	</div>
 
+	<?php echo form_open_multipart('photoUploader/do_upload', 'id="the_only_form"');?>
 
 	<div class="field">
 		<?php echo form_label('Student Name:', 'std_name'); ?>
@@ -49,7 +55,12 @@
 	<div class="field">
 		<?php echo form_label('Registered Module:', 'selected_module'); ?>
 
+		<?php // echo form_dropdown('module', $module_arr, isset($module) ? $module : 0); ?>
+		<?php // echo form_submit('submit', 'Add', 'class="btn"'); ?>
+		<?php // echo form_error('module'); ?>
+
 		<?php echo form_multiselect( 'selected_module[]', $module_arr, isset( $std_module ) ? $std_module : array() ); ?>
+		<?php //echo form_submit('submit', 'Remove', 'class="btn"'); ?>
 		<?php echo form_error('module'); ?>
 	</div>
 
