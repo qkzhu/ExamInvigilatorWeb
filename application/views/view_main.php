@@ -24,32 +24,37 @@
 	</div>
 
 
-	<div class="field">
+	<div class="field" id="gender">
 		<?php echo form_label('Gender:', 'gender'); ?>
-		<?php echo form_radio('gender', 'Male', isset($gender) ? $gender == 'Male' : FALSE, 'class="required"'); ?>Male
-		<?php echo form_radio('gender', 'Female', isset($gender) ? $gender == 'Female' : FALSE, 'class="required"'); ?>Female
+		<div id="gender_group">
+		<?php echo form_radio('gender', 'Male', isset($gender) ? $gender == 'Male' : FALSE, 'class="required"'); ?> Male 
+		<?php echo form_radio('gender', 'Female', isset($gender) ? $gender == 'Female' : FALSE, 'class="required"'); ?> Female
+		</div>
 		<?php echo form_error('gender'); ?>
 	</div>
 
 
 	<div class="field">
 		<?php echo form_label('Department:', 'dep'); ?>
+		<div class="dropdown">
 		<?php echo form_dropdown('dep', $dep_arr, isset($dep) ? $dep : 0); ?>
+		</div>
 		<?php echo form_error('dep'); ?>
 	</div>	
 
 
 	<div class="field">
 		<?php echo form_label('Year of Enrolment:', 'year'); ?>
+		<div class="dropdown">
 		<?php echo form_dropdown('year', $year_arr, isset($year) ? $year : 0); ?>
+		</div>
 		<?php echo form_error('year'); ?>
 	</div>	
 
 
-	<div class="field">
+	<div class="field" id="multi_box_field">
 		<?php echo form_label('Registered Module:', 'selected_module'); ?>
-
-		<?php echo form_multiselect( 'selected_module[]', $module_arr, isset( $std_module ) ? $std_module : array() ); ?>
+		<?php echo form_multiselect( 'selected_module[]', $module_arr, isset( $std_module ) ? $std_module : array(), 'id="multi_box"' ); ?>
 		<?php echo form_error('module'); ?>
 	</div>
 

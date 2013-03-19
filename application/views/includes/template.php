@@ -28,25 +28,20 @@
 	</script>
 	-->
 
-	<!--
+	
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>css/style.css" />
+	
 
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.js" ></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.validate.min.js" ></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery.validate-rules.js" ></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>js/jquery_add_module.js" ></script>
 	
-	-->
 
 </head>
 
+
 <body>
-
-	<div class="body_header">
-		<div class="body_header_banner_logo"></div>
-		<div class="body_header_banner"></div>
-	</div>
-
+	
 	<div class="wrap">
 
 		<div class="header">

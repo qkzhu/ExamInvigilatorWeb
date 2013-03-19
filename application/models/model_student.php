@@ -35,11 +35,12 @@ class Model_student extends CI_Model {
 
 
 
-
-	function update_std_info( $std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo )
+	/**
+	 * Update student infomation
+	 */
+	function update_std_info( $std_id, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo )
 	{
 		$data = array(
-			$this->model_config->STD_NUM => $std_num,
 			$this->model_config->STD_NAME => $std_name,
 			$this->model_config->STD_IC => $std_ic,
 			$this->model_config->STD_GENDER => $std_gender,
@@ -48,7 +49,7 @@ class Model_student extends CI_Model {
 			$this->model_config->STD_PHOTO => $std_photo
 		);
 		
-		$this->db->where($this->model_config->STD_NUM, $std_num);
+		$this->db->where($this->model_config->STD_ID, $std_id);
 		$this->db->update($this->model_config->STD_TABLE, $data);
 
 	} // end update_std_info
@@ -177,6 +178,10 @@ class Model_student extends CI_Model {
 	}
 
 
+
+
+
+
 	/**
 	 * Primary key map table between student & module
 	 */
@@ -192,6 +197,44 @@ class Model_student extends CI_Model {
 		}
 
 	} // end create_std_mod_map
+
+
+
+
+
+	/**
+	 * Remove all mappping between student id and module id, for the given student id
+	 */
+	function remove_std_mode_map( $std_id )
+	{
+
+		$this->db->where( $this->model_config->MAP_SID, $std_id );
+		$this->db->delete( $this->model_config->MAP_TABLE );
+
+	} // end remove_std_mode_map
+
+
+
+
+
+
+	/**
+	 * Return all student's infomation by given student id
+	 */
+	function get_student_info_by_sid( $std_id )
+	{
+		if ( !isset($std_id) || trim($std_id) == '') return array();
+
+		$this->db->from( $this->model_config->STD_TABLE );
+		$this->db->where( $this->model_config->STD_ID, $std_id );
+		
+		$query = $this->db->get();
+		$query_result = $query->first_row();
+
+		if ( sizeof($query_result) == 1 ) return $query_result;
+		else return array();
+
+	} // end get_student_info_by_sid
 
 
 } // end class
