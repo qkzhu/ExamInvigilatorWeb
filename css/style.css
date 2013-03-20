@@ -47,14 +47,12 @@ body {
     position: relative;
     background:#FFFFFF;
     width: 900px;
-    border:10px solid #eaeaea;
+    border:5px solid #eaeaea;
 }
 
 
 #the_only_form, #search_form { padding: 10px; vertical-align: center; }
 #the_only_form .field, #search_form.field { margin-bottom:10px; height: 40px; }
-
-#module.field { height: 90px; }
 
 #the_only_form label{
 	display: block;
@@ -80,18 +78,27 @@ body {
 	color: #797979;
 	font-size: 15px;
 	padding: 8px 30px;
-	/*width: 300px;*/
-	/*line-height: 100%;*/
 	font-weight: bold;
 }
+
+#the_only_form #multi_box { font-size: 12px; }
 
 #gender_group { padding-top: 8px; }
 
 .dropdown { padding-top: 8px; }
 
+#error_module {
+	height: 30px;
+	margin-left: 200px;
+}
 
-#the_only_form  #multi_box_field { height: 80px; }
-#multi_box { height: 80px;}
+#the_only_form input[type="file"] {
+	margin-top: 8px;
+}
+
+
+#the_only_form  #multi_box_field { height: 90px; margin-bottom: 20px; }
+#multi_box { height: 80px; font-size: 12px; margin-top: 5px;}
 
 #the_only_form :focus{
 	-webkit-box-shadow: 0px 0px 4px #aaa;
@@ -115,8 +122,8 @@ body {
 	margin-left:220px;
 }
 
-#the_only_form span.error { color: red; padding-left:10px; }
-
+#the_only_form span.error { color: red; padding-left:10px; font-size: 12px;}
+#error_gender { background: yellow; }
 
 
 

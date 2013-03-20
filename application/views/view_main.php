@@ -24,12 +24,15 @@
 	</div>
 
 
-	<div class="field" id="gender">
+	<div class="field">
 		<?php echo form_label('Gender:', 'gender'); ?>
 		<div id="gender_group">
-		<?php echo form_radio('gender', 'Male', isset($gender) ? $gender == 'Male' : FALSE, 'class="required"'); ?> Male 
-		<?php echo form_radio('gender', 'Female', isset($gender) ? $gender == 'Female' : FALSE, 'class="required"'); ?> Female
+			<?php echo form_radio( 'gender', 'Male', isset($gender) ? $gender == 'Male' : FALSE, 'class="required"' ); ?> 
+			<span class="gender_option">Male </span>
+			<?php echo form_radio( 'gender', 'Female', isset($gender) ? $gender == 'Female' : FALSE, 'class="required"' ); ?>
+			<span class="gender_option">Female</span>
 		</div>
+
 		<?php echo form_error('gender'); ?>
 	</div>
 
@@ -54,7 +57,9 @@
 
 	<div class="field" id="multi_box_field">
 		<?php echo form_label('Registered Module:', 'selected_module'); ?>
-		<?php echo form_multiselect( 'selected_module[]', $module_arr, isset( $std_module ) ? $std_module : array(), 'id="multi_box"' ); ?>
+		<?php echo form_multiselect( 'selected_module[]', $module_arr, 
+				isset( $std_module ) ? $std_module : array(), 'id="multi_box", class="required"' ); ?>
+		<div id="error_module"></div>
 		<?php echo form_error('module'); ?>
 	</div>
 

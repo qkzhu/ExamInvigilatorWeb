@@ -76,7 +76,6 @@
 
 $(document).ready(function() {
 	$( "#the_only_form" ).validate({
-
 		errorElement: "span", 
 
 		rules: {
@@ -84,6 +83,10 @@ $(document).ready(function() {
 				required: true,
 				minlength: 9,
 				maxlength: 9,
+			},
+
+			"selected_module[]": {
+				required: true
 			}
 		},
 
@@ -93,7 +96,32 @@ $(document).ready(function() {
 				required: " Please provide your student number",
 				minlength: " Invalid Student number format, please re-etner.",
 				maxlength: " Invalid Student number format, please re-etner."
-			},
+			}, 
+
+			// "selected_module[]": {
+			// 	required: "<div />hahaha"
+			// }
+		},
+
+		errorPlacement: function(error, element) {
+			if ( element.is(":radio") ) {
+				error.insertAfter( '.gender_option:last' );
+			}
+			else if ( element.is("#multi_box") ) {
+				error.appendTo( '#error_module' );
+			}
+			else { // This is the default behavior of the script for all fields
+				error.insertAfter( element );
+			}
+		}
+	});
+
+	$('#file_upload').validate({
+		errorElement: "span",
+
+		rules: {
+			required: false,
+			accept: "jpg|jpeg"
 		}
 	});
 
