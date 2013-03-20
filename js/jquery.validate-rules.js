@@ -97,10 +97,6 @@ $(document).ready(function() {
 				minlength: " Invalid Student number format, please re-etner.",
 				maxlength: " Invalid Student number format, please re-etner."
 			}, 
-
-			// "selected_module[]": {
-			// 	required: "<div />hahaha"
-			// }
 		},
 
 		errorPlacement: function(error, element) {
@@ -125,7 +121,4 @@ $(document).ready(function() {
 		}
 	});
 
-	$('#btn_add_module').on('click', function() { 
-		alert('hahaha'); 
-	});
 });

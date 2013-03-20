@@ -64,7 +64,7 @@
 	</div>
 
 
-	<div class="field">
+	<div class="field upload_filed">
 		<?php echo form_label('Photo:', 'photo'); ?>
 		<input type="file" name="userfile" size="20" 'class="btn"' />
 		<?php echo form_error('userfile'); ?>

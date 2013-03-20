@@ -15,7 +15,7 @@
 	</div>
 
 
-	<?php if ( isset($selected_sid) ): ?>
+	<?php if ( isset($selected_sid) && $selected_sid != -1 ): ?>
 
 	<div id="update_form">
 		<?php 
