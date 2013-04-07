@@ -56,6 +56,7 @@ class InfoUpdate extends CI_Controller {
 		$data['dep'] = $std_info->{ $this->model_config->STD_DEP };
 		$data['year'] = $std_info->{ $this->model_config->STD_YEAR };
 		$data['std_module'] = $this->model_student->get_all_module_by_sid( $data['selected_sid'] );
+		$data['std_photo_path'] = base_url() . 'uploads/' . $std_info->{ $this->model_config->STD_NUM } . '.jpg';
 
 		endif;
 
@@ -71,22 +72,27 @@ class InfoUpdate extends CI_Controller {
 	/**
 	 * For handling form request to update user info
 	 */
+	// check if photo exits, 
+	//		if so, remove exiting one and add new one.
 	function do_update()
 	{
-
 		$data = $this->getPageComponents();	
 
 		$data['main'] = 'view_update';
 
 		// get inputs
 		$data['std_id'] = $this->input->post('select_std_id');
-		$data['std_num'] = $this->input->post('std_num');
+		$data['selected_sid'] = $this->input->post('select_std_id');
 		$data['std_name'] = $this->input->post('std_name');
 		$data['std_ic'] = $this->input->post('std_ic');
 		$data['gender'] = $this->input->post('gender');
 		$data['dep'] = $this->input->post('dep');
 		$data['year'] = $this->input->post('year');
 		$data['std_module'] = $this->input->post('selected_module');
+
+		$std_info = $this->model_student->get_student_info_by_sid( $data['selected_sid'] );
+		$std_num = $std_info->{ $this->model_config->STD_NUM };
+		$data['std_photo_path'] = base_url() . 'uploads/' . $std_num . '.jpg';
 
 
 		// set field to display error message individually
@@ -146,14 +152,6 @@ class InfoUpdate extends CI_Controller {
 
 		else 
 		{
-
-			$config['upload_path'] = './uploads/';
-			$config['allowed_types'] = 'jpg|jpeg';
-			$config['max_size']	= '100';
-			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
-			$config['file_name']  = $data['std_num'];
-
 			$this->model_student->update_std_info(
 					$data['std_id'], $data['std_name'], $data['std_ic'], 
 					$data['gender'], $data['dep'], $data['year'], 
@@ -162,32 +160,25 @@ class InfoUpdate extends CI_Controller {
 			$this->model_student->remove_std_mode_map( $data['std_id'] );
 			$this->model_student->create_std_mod_map( $data['std_id'], $data['std_module'] );
 
-			/*
+			/**
+			 * Prepare for uploading file if upload button is clicked
+			 */
+
+			$config['upload_path'] = './uploads/';
+			$config['allowed_types'] = 'jpg|jpeg';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+			$config['file_name']  = $std_num;
+			$config['overwrite'] = true;
+
 			$this->load->library('upload', $config);
 
-			// $data = null;
 			if ( ! $this->upload->do_upload() )
 			{
 				$data['error'] = array( 'error' => $this->upload->display_errors() );
-				$data['main'] = 'view_update';
 			}
-			else
-			{
-				// update student details to database
-				$new_sid = $this->model_student->update_std_info(
-									$data['std_id'], $data['std_name'], $data['std_ic'], 
-									$data['gender'], $data['dep'], $data['year'], 
-									$this->model_config->CONS_PHOTO_TRUE );
-
-				$this->model_student->create_std_mod_map( $new_sid, $data['std_module'] );
-
-				// insert moduels with student map into database
-				// $this->model_student->create_std_mod_map();
-
-				$data = array('upload_data' => $this->upload->data());
-				$data['main'] = 'view_upload_success';
-			}
-			*/
+			
 
 			$this->load->view('includes/template', $data);
 		}

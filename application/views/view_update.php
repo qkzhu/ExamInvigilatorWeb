@@ -18,10 +18,22 @@
 	<?php if ( isset($selected_sid) && $selected_sid != -1 ): ?>
 
 	<div id="update_form">
+
 		<?php 
 		echo form_open_multipart('infoUpdate/do_update', 'id="the_only_form"');
 		echo form_hidden( 'select_std_id', isset($selected_sid) ? $selected_sid : -1 );
 		?>
+
+
+		<div>
+			<?php echo form_label('Photo:', 'std_photo'); ?>
+			<?php if ( isset($std_photo_path) ): ?>
+			<img src=<?php echo $std_photo_path; ?> name='std_photo' />
+			<?php else: ?>
+			<span name='std_photo'>NO Photo found.</span>
+			<?php endif;?>
+		</div>
+
 
 		<div class="field">
 			<?php echo form_label('Student Name:', 'std_name'); ?>
@@ -72,14 +84,14 @@
 		</div>
 
 
-		<!--
+		
 		<div class="field">
 			<?php echo form_label('Photo:', 'photo'); ?>
 			<input type="file" name="userfile" size="20" 'class="btn"' />
 			<?php echo form_error('userfile'); ?>
 			<?php echo isset($error['error']) ? $error['error'] : '';?>
 		</div>
-		-->
+		
 
 		<div class="field">
 		<?php echo form_submit('submit', 'Update', 'class="btn"'); ?>

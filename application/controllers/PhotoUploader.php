@@ -64,7 +64,8 @@ class PhotoUploader extends CI_Controller {
 	 *			what UI is better to add up to with remove button, maybe just a label with remove button.
 	 *		
 	 */
-	// TODO: check if same student has uploaded photo before
+	// TODO: check if matric number exists
+	//		if so, send error.
 	function do_upload()
 	{
 		// print_r( $_FILES );
@@ -193,19 +194,21 @@ class PhotoUploader extends CI_Controller {
 			}
 			else
 			{
+				// $data = array('upload_data' => $this->upload->data());
+				$data['upload_data'] = $this->upload->data();
+				$data['main'] = 'view_upload_success';
+
 				// insert student details to database
 				$new_sid = $this->model_student->create_new_student(
 									$data['std_num'], $data['std_name'], $data['std_ic'], 
 									$data['gender'], $data['dep'], $data['year'], 
-									$this->model_config->CONS_PHOTO_TRUE );
+									$this->model_config->CONS_PHOTO_TRUE,
+									$data['upload_data']['file_name'] );
 
 				$this->model_student->create_std_mod_map( $new_sid, $data['std_module'] );
 
 				// insert moduels with student map into database
 				// $this->model_student->create_std_mod_map();
-
-				$data = array('upload_data' => $this->upload->data());
-				$data['main'] = 'view_upload_success';
 			}
 
 			$this->load->view('includes/template', $data);

@@ -1,4 +1,5 @@
 -- create database ExamInvigilator
+-- alter table student add photo_name varchar(32) 
 
 create table department(
 	id int not null auto_increment,
@@ -16,6 +17,7 @@ create table student(
 	department int not null,
 	enrol_year year not null,
 	has_photo tinyint(1) default 0 not null check(has_photo in (0,1)),
+	photo_name varchar(32),
 	unique(student_number),
 	primary key(id),
 	foreign key(department) references department(id)

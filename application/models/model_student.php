@@ -13,8 +13,12 @@ class Model_student extends CI_Model {
 	/**
 	  *  insert student info into database and return the last inserted id. 
 	  */ 
-	function create_new_student( $std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo )
+	function create_new_student( $std_num, $std_name, $std_ic, $std_gender, $std_dep, $year, $std_photo, $photo_name )
 	{
+
+		if ( !isset($photo_name) || trim($photo_name) == "" )
+			$photo_name = $std_num . ".jpg";
+
 		$data = array(
 			$this->model_config->STD_NUM => $std_num,
 			$this->model_config->STD_NAME => $std_name,
@@ -22,7 +26,8 @@ class Model_student extends CI_Model {
 			$this->model_config->STD_GENDER => $std_gender,
 			$this->model_config->STD_DEP => $std_dep,
 			$this->model_config->STD_YEAR => $year,
-			$this->model_config->STD_PHOTO => $std_photo
+			$this->model_config->STD_PHOTO => $std_photo,
+			$this->model_config->STD_PHOTO_NAME => $photo_name
 		);
 		
 		$this->db->insert($this->model_config->STD_TABLE, $data);

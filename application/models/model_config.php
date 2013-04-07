@@ -23,6 +23,7 @@ class Model_config extends CI_Model
 	public $STD_DEP = "department";
 	public $STD_YEAR = "enrol_year";
 	public $STD_PHOTO = "has_photo";
+	public $STD_PHOTO_NAME = "photo_name";
 
 
 	/**

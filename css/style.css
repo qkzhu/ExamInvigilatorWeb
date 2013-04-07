@@ -27,44 +27,55 @@ body {
 
 /****** header ******/
 
-.header, #banner { height: 80px; width: 100%; }
+#banner { height: auto; }
 
-#banner .banner_element { 
-	display: inline-block; 
-	float: left; 
-	padding: 0; margin: 0; 
+#banner_logo {
 	height: 80px;
-}
-#banner .clearBoth { clear:both; }
-
-#banner_menu { width: 200px; }
-#banner_text { width: 489px; }
-#banner_logo { width: 211px; }
-
-.banner_element ul { list-style-type: none; }
-.banner_element ul li { 
-	height: 40px; 
-	padding-left: 30%;
-}
-.banner_element ul li a { 
-	text-decoration: none; 
-	line-height: 2em;
-	color: black; 
-	margin-top: 30px;
-	font-size: 20px;
+	overflow: hidden;
+	width: 100%;
 }
 
-.banner_element ul li:hover { background: #CCFF99; }
 
-
-#banner_text {
-	text-indent: 2em;
+#banner_logo_text {
+	float: left;
+	height: 80px;
+	/*image.width == 211, 900-211-249=440, 440/2 = 220*/
+	padding: 0 220px; 
 	font-size: 30px;
-	margin-top: 20px;
-	line-height: 2em;
+	padding-top: 20px;
 }
 
+#banner_logo_img img{ height: 80px; }
 
+
+
+
+#banner_menu {
+	height: 30px;
+	background: #D3D3D3;
+}
+
+#banner_menu * {
+	text-decoration: none;
+	list-style: none;
+	color: black;
+	margin:0; padding: 0;
+	text-align: center;
+}
+
+#banner_menu ul li {
+	float: left;
+	width: 299px;
+	padding: 5px 0;
+	border-left: black solid 1px;
+}
+
+#banner_menu ul li:first-child {
+	border: none;
+	width: 300px;
+}
+
+#banner_menu ul li:hover { background: #FFFFE0; }
 
 
 
@@ -161,6 +172,29 @@ body {
 
 
 
+/****** for upload successful page page ******/
+#upload_succ {
+	text-align: center;
+	margin: 50px 0;
+}
+
+#upload_succ h2 { 
+	font-size: 20px;
+	margin: 30px 0;
+	color: #00FF7F;
+}
+
+#upload_succ p a {
+	text-decoration: none;
+	color:gray;
+	font-weight: bold;
+}
+
+#upload_succ p a:hover {
+	padding: 10px 30px;
+	background: #58595b;
+	color: white;
+}
 
 
 /****** Part for footer ******/
